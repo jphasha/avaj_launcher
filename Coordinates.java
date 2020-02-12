@@ -12,5 +12,16 @@ public class Coordinates {
         this.latitude = latitude;
         this.height = height;
     }
-    public
+
+    public int getLongitude() {
+        return this.longitude;
+    }
+
+    public int getLatitude() {
+        return this.latitude;
+    }
+
+    public int getHeight() {
+        return this.height;
+    }
 }
