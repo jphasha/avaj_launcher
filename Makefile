@@ -6,7 +6,10 @@ OBJECTS = $(package)Aircraft.class $(package)Coordinates.class $(package)Helicop
 
 all: $(OBJECTS)
 
-re:
+$(OBJECTS): $(SOURCES)
+	javac $(package)Aircraft.java
+
+re: fclean alll
 
 clean:
 
