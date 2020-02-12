@@ -11,9 +11,10 @@ public abstract class Aircraft {
         
         this.name = name;
         this.coordinates = coordinates;
+        this.id = nextId();
     }
 
     private long nextId() {
-        return idCounter++;
+        return this.idCounter++;
     }
 }
