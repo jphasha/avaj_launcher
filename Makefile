@@ -4,7 +4,7 @@ SOURCES = $(package)Aircraft.java $(package)Coordinates.java $(package)Helicopte
 
 OBJECTS = $(package)Aircraft.class $(package)Coordinates.class $(package)Helicopter.class \
 
-all:
+all: $(OBJECTS)
 
 re:
 
