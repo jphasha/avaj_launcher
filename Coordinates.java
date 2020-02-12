@@ -8,9 +8,24 @@ public class Coordinates {
 
     // for the Coordinates() method, i'm not yet clear how to handle "~", so i'm gonna leave like it is and hope the default access modifier rules apply.
     Coordinates(int longitude, int latitude, int height) {
-        this.longitude = longitude;
-        this.latitude = latitude;
-        this.height = height;
+        // longitude, latitude and height can never be less than zero, so:
+        if (longitude < 0) {
+            this.longitude = 0;
+        } else {
+            this.longitude = longitude;
+        }
+
+        if (latitude < 0) {
+            this.latitude = 0;
+        } else {
+            this.latitude = latitude;
+        }
+
+        if (height < 0) {
+            this.height = 0;
+        } else {
+            this.height = height;
+        }
     }
 
     public int getLongitude() {
