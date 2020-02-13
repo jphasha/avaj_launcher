@@ -8,8 +8,17 @@ public class    WeatherProvider {
     private static string[] weather = {"RAIN", "FOG", "SUN", "SNOW"};
 
     private WeatherProvider() {
-        // we will talk.
+//        a constructor so i can't ignore it.
+        return ;
     }
 
-    public static WeatherProvider getProvider() {}
+    public static WeatherProvider getProvider() {
+        // get the WeatherProvider instance.
+        weatherProvider = new WeatherProvider();
+        return weatherProvider;
+    }
+
+    public String getCurrentWeather(Coordinates coordinates) {
+        // we will give content later when i have a better understanding of what i am doing.
+    }
 }

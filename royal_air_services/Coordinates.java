@@ -33,10 +33,12 @@ public class Coordinates {
     }
 
     public int getLatitude() {
+
         return this.latitude;
     }
 
     public int getHeight() {
+
         return this.height;
     }
 }
