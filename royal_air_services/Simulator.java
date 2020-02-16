@@ -67,7 +67,7 @@ public class Simulator {
         if (delFile.delete()) {
             System.out.println("that file is outta here");
         } else {
-            System.out.println("Listen, that file is so far gone.\nIt is outta here");
+            System.out.println("Listen, that file is so far gone. It is outta here");
         }
     }
 }
