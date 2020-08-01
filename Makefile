@@ -1,4 +1,22 @@
-all:
-	@java Simulator.java scenario.txt
+package = za/co/wethinkcode/royalAirServices/
+
+OBJ = $(package)Simulator.class
+
+SRC = $(package)Simulator.java
+
+all: $(OBJ)
+	@java $(package)Simulator scenario.txt
+
+$(OBJ): find
+	@javac @sources.txt
+
+find: $(SRC)
+	@find -name *.java > sources.txt
+
 clean:
-	@rm *.class
+	@rm simulation.txt
+
+fclean: clean
+	@rm $(package)*.class sources.txt
+
+re: fclean all
