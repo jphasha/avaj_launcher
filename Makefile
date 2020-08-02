@@ -4,7 +4,10 @@ OBJ = $(package)Simulator.class
 
 SRC = $(package)Simulator.java
 
-all: $(OBJ)
+all: run
+	@cat -e simulation.txt
+
+run: $(OBJ)
 	@java $(package)Simulator scenario.txt
 
 $(OBJ): find
