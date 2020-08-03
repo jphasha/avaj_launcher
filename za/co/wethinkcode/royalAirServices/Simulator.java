@@ -46,6 +46,8 @@ public class Simulator {
                 sb.append("\n" + args[i]);
             }
             sb.append("\nAs your argument(Provided that they are txt files). Otherwise use 'scenario.txt' as your argument");
+            int pos = sb.indexOf(". You should");
+            sb.insert(pos, ", " + args.length + " to be exact");
             System.out.println(sb.toString());
         } else {
             System.out.println("you need to have 1 argument when running this program\nPreferrably a file named'scenario.txt'.");
