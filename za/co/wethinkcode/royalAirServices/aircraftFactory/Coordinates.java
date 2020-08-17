@@ -3,7 +3,7 @@ package za.co.wethinkcode.royalAirServices.aircraftFactory;
 public class Coordinates {
     private int longitude, latitude, height;
 
-    Coordinates(int longitude, int latitude, int height) {
+    public Coordinates(int longitude, int latitude, int height) {
         if (longitude < 0) {
             this.longitude = 0;
         } else {
