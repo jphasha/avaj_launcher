@@ -16,10 +16,14 @@ public class Coordinates {
             this.latitude = latitude;
         }
 
-        if (height < 0) {
-            this.height = 0;
+        if (height > 0) {
+            if (height > 100) {
+                this.height = 100;
+            } else {
+                this.height = height;
+            }
         } else {
-            this.height = height;
+            this.height = 0;
         }
     }
 
