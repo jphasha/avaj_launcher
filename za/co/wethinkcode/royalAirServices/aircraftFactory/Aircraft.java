@@ -1,6 +1,6 @@
 package za.co.wethinkcode.royalAirServices.aircraftFactory;
 
-public class Aircraft {
+public abstract class Aircraft {
     protected long id;
     protected String name;
     protected Coordinates coordinates;
