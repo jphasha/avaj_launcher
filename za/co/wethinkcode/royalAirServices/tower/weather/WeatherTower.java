@@ -4,6 +4,9 @@ import za.co.wethinkcode.royalAirServices.aircraftFactory.Coordinates;
 import za.co.wethinkcode.royalAirServices.tower.Tower;
 
 public class WeatherTower extends Tower {
-    public String getWeatherCoordinates(Coordinates coordinates) {}
+    public String getWeather(Coordinates coordinates) {
+        WeatherProvider weather = WeatherProvider.getProvider();
+        return weather.getCurrentWeather(coordinates);
+    }
     private void changeWeather() {};
 }
