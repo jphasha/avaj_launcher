@@ -13,5 +13,9 @@ public abstract class Tower {
     public void unregister(Flyable flyable) {
         observers.remove(observers.indexOf(flyable));
     }
-    protected void conditionsChanged() {}
+    protected void conditionsChanged() {
+        for (Flyable observer : observers) {
+            observer.updateConditions();
+        }
+    }
 }
