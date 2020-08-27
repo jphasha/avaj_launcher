@@ -1,11 +1,17 @@
 package za.co.wethinkcode.royalAirServices;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Simulator {
+
+    public static List<String> scenario = new ArrayList<>();
     public static void main(String[] args) {
         if (args.length == 1) {
             correctFormat(args);
@@ -16,23 +22,8 @@ public class Simulator {
 
     private static void correctFormat(String[] args) {
         try {
-            File scenarioFile = new File(args[0]);
-            FileWriter simulationFile = new FileWriter("simulation.txt");
-            Scanner scenarioReader = new Scanner(scenarioFile);
-
-            try {
-                simulationFile.write("Something");
-                simulationFile.close();
-                System.out.println("file created and written into successfully");
-            } catch (IOException err) {
-                err.getMessage();
-            }
-
-            while (scenarioReader.hasNextLine()) {
-                String scenarioText = scenarioReader.nextLine();
-                System.out.println(scenarioText);
-            }
-            scenarioReader.close();
+            readScenario(args);
+            writeSimulation();
         } catch (IOException exc) {
             System.out.println(exc.getMessage());
         }
@@ -51,6 +42,34 @@ public class Simulator {
             System.out.println(sb.toString());
         } else {
             System.out.println("you need to have 1 argument when running this program\nPreferrably a file named'scenario.txt'.");
+        }
+    }
+
+    private static void readScenario(String[] args) throws IOException {
+        File scenarioFile = new File(args[0]);
+        BufferedReader scenarioReader = new BufferedReader(new FileReader(scenarioFile));
+        String scenarioLine = null;
+
+        while ((scenarioLine = scenarioReader.readLine()) != null) {
+            scenario.add(scenarioLine);
+        }
+        scenarioReader.close();
+    }
+
+    private static void writeSimulation() throws IOException {
+        BufferedWriter simulationFile = new BufferedWriter(new FileWriter("simulation.txt"));
+
+        try {
+            for (String content : scenario) {
+                simulationFile.write(content);
+                // simulationFile.newLine();
+                simulationFile.append("\n");
+                System.out.println(content);
+            }
+            simulationFile.close();
+            System.out.println("file created and written into successfully");
+        } catch (IOException err) {
+            err.getMessage();
         }
     }
 }
