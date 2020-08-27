@@ -12,6 +12,7 @@ import java.util.List;
 public class Simulator {
 
     public static List<String> scenario = new ArrayList<>();
+    public static int simulations = 0;
     public static void main(String[] args) {
         if (args.length == 1) {
             correctFormat(args);
@@ -23,9 +24,12 @@ public class Simulator {
     private static void correctFormat(String[] args) {
         try {
             readScenario(args);
+            parseScenario();
             writeSimulation();
         } catch (IOException exc) {
             System.out.println(exc.getMessage());
+        } catch (NumberFormatException err) {
+            System.out.println(err.getMessage());
         }
     }
     private static void wrongFormat(String[] args) {
@@ -71,5 +75,10 @@ public class Simulator {
         } catch (IOException err) {
             err.getMessage();
         }
+    }
+
+    private static void parseScenario() throws NumberFormatException {
+        simulations = Integer.valueOf(scenario.get(0));
+        System.out.println("PLOT: " + scenario.get(0));
     }
 }
