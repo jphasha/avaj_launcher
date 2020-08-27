@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import za.co.wethinkcode.royalAirServices.exceptions.CustomException;
+
 public class Simulator {
 
     public static List<String> scenario = new ArrayList<>();
@@ -28,7 +30,7 @@ public class Simulator {
             writeSimulation();
         } catch (IOException exc) {
             System.out.println(exc.getMessage());
-        } catch (NumberFormatException err) {
+        } catch (CustomException err) {
             System.out.println(err.getMessage());
         }
     }
@@ -77,8 +79,14 @@ public class Simulator {
         }
     }
 
-    private static void parseScenario() throws NumberFormatException {
-        simulations = Integer.valueOf(scenario.get(0));
-        System.out.println("PLOT: " + scenario.get(0));
+    private static void parseScenario() throws CustomException {
+        try {
+            simulations = Integer.valueOf(scenario.get(0));
+            if (simulations < 1) {
+                throw new CustomException("Simulation must be run atleast once", scenario.get(0) + " will not do.");
+            }
+        } catch (NumberFormatException err) {
+            throw new CustomException("The number of simulations must be a number(integer), and not", scenario.get(0), err);
+        }
     }
 }
