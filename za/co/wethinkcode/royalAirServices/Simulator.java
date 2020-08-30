@@ -70,23 +70,52 @@ public class Simulator {
                 simulationFile.write(content);
                 // simulationFile.newLine();
                 simulationFile.append("\n");
-                System.out.println(content);
             }
             simulationFile.close();
-            System.out.println("file created and written into successfully");
         } catch (IOException err) {
             err.getMessage();
         }
     }
 
     private static void parseScenario() throws CustomException {
-        try {
-            simulations = Integer.valueOf(scenario.get(0));
-            if (simulations < 1) {
-                throw new CustomException("Simulation must be run atleast once", scenario.get(0) + " will not do.");
+        String[] aircraftDetails;
+        List<String> craftDetails = new ArrayList<>();
+
+        for (String scenarioLine : scenario) {
+            if (scenario.indexOf(scenarioLine) != 0) {
+                aircraftDetails = null;
+                aircraftDetails = scenarioLine.split(" ");
+                for (String splitDetail : aircraftDetails) {
+                    if (!splitDetail.isEmpty()) {
+                        craftDetails.add(splitDetail);
+                    }
+                }
+                if (craftDetails.size() == 5) {
+                    try {
+                        if (Integer.valueOf(craftDetails.get(2)) >= 0 && Integer.valueOf(craftDetails.get(3)) >= 0 && Integer.valueOf(craftDetails.get(4)) >= 0) {
+                            if (craftDetails.get(0).equalsIgnoreCase("Helicopter") || craftDetails.get(0).equalsIgnoreCase("Baloon") || craftDetails.get(0).equalsIgnoreCase("Jetplane")) {
+                                // Create some aircrafts
+                            } else {
+                                throw new CustomException("Invalid craft type", craftDetails.get(0) + " is wrong");
+                            }
+                        }
+                    } catch(NumberFormatException er) {
+                        throw new CustomException("Latitude, Longitude and height are all expected to be positive numbers", "See anything wrong here?: " + craftDetails.get(0) + " " + craftDetails.get(1) + " " + craftDetails.get(2) + " " + craftDetails.get(3) + " " + craftDetails.get(4));
+                    }
+                    craftDetails.clear();
+                } else {
+                    throw new CustomException("All lines save for the number of simulations line needs 5 parts/words", scenarioLine + " has " + craftDetails.size());
+                }
+            } else {
+                try {
+                    simulations = Integer.valueOf(scenario.get(0));
+                    if (simulations < 1) {
+                        throw new CustomException("Simulation must be run atleast once", scenario.get(0) + " will not do.");
+                    }
+                } catch (NumberFormatException err) {
+                    throw new CustomException("The number of simulations must be a number(integer), and not", scenario.get(0), err);
+                }
             }
-        } catch (NumberFormatException err) {
-            throw new CustomException("The number of simulations must be a number(integer), and not", scenario.get(0), err);
         }
     }
 }

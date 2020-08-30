@@ -10,7 +10,8 @@ OBJ = $(package)Simulator.class \
 	$(package)aircraftFactory/Coordinates.class \
 	$(package)aircraftFactory/aircrafts/Baloon.class \
 	$(package)aircraftFactory/aircrafts/Helicopter.class \
-	$(package)aircraftFactory/aircrafts/JetPlane.class
+	$(package)aircraftFactory/aircrafts/JetPlane.class \
+	$(package)exceptions/CustomException.class
 
 SRC = $(package)Simulator.java \
 	$(package)interfaces/Flyable.java \
@@ -22,7 +23,8 @@ SRC = $(package)Simulator.java \
 	$(package)aircraftFactory/Coordinates.java \
 	$(package)aircraftFactory/aircrafts/Baloon.java \
 	$(package)aircraftFactory/aircrafts/Helicopter.java \
-	$(package)aircraftFactory/aircrafts/JetPlane.java
+	$(package)aircraftFactory/aircrafts/JetPlane.java \
+	$(package)exceptions/CustomException.java
 
 all: run
 	@cat -e simulation.txt
