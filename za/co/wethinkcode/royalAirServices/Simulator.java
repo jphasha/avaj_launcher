@@ -9,12 +9,17 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import za.co.wethinkcode.royalAirServices.aircraftFactory.AircraftFactory;
 import za.co.wethinkcode.royalAirServices.exceptions.CustomException;
+import za.co.wethinkcode.royalAirServices.interfaces.Flyable;
+import za.co.wethinkcode.royalAirServices.logBook.LogBook;
+import za.co.wethinkcode.royalAirServices.tower.weather.WeatherTower;
 
 public class Simulator {
 
     public static List<String> scenario = new ArrayList<>();
     public static int simulations = 0;
+    public static List<Flyable> aircrafts = new ArrayList<>();
     public static void main(String[] args) {
         if (args.length == 1) {
             correctFormat(args);
@@ -27,6 +32,7 @@ public class Simulator {
         try {
             readScenario(args);
             parseScenario();
+            simulate();
             writeSimulation();
         } catch (IOException exc) {
             System.out.println(exc.getMessage());
@@ -47,7 +53,7 @@ public class Simulator {
             sb.insert(pos, ", " + args.length + " to be exact");
             System.out.println(sb.toString());
         } else {
-            System.out.println("you need to have 1 argument when running this program\nPreferrably a file named'scenario.txt'.");
+            System.out.println("you need to have 1 argument when running this program\nPreferrably a file named 'scenario.txt'.");
         }
     }
 
@@ -66,9 +72,8 @@ public class Simulator {
         BufferedWriter simulationFile = new BufferedWriter(new FileWriter("simulation.txt"));
 
         try {
-            for (String content : scenario) {
+            for (String content : LogBook.logs) {
                 simulationFile.write(content);
-                // simulationFile.newLine();
                 simulationFile.append("\n");
             }
             simulationFile.close();
@@ -94,7 +99,7 @@ public class Simulator {
                     try {
                         if (Integer.valueOf(craftDetails.get(2)) >= 0 && Integer.valueOf(craftDetails.get(3)) >= 0 && Integer.valueOf(craftDetails.get(4)) >= 0) {
                             if (craftDetails.get(0).equalsIgnoreCase("Helicopter") || craftDetails.get(0).equalsIgnoreCase("Baloon") || craftDetails.get(0).equalsIgnoreCase("Jetplane")) {
-                                // Create some aircrafts
+                                aircrafts.add(AircraftFactory.newAircraft(craftDetails.get(0), craftDetails.get(1), Integer.valueOf(craftDetails.get(2)), Integer.valueOf(craftDetails.get(3)), Integer.valueOf(craftDetails.get(4))));
                             } else {
                                 throw new CustomException("Invalid craft type", craftDetails.get(0) + " is wrong");
                             }
@@ -116,6 +121,18 @@ public class Simulator {
                     throw new CustomException("The number of simulations must be a number(integer), and not", scenario.get(0), err);
                 }
             }
+        }
+    }
+
+    private static void simulate() {
+        WeatherTower weatherTower = new WeatherTower();
+
+        for (Flyable flyable : aircrafts) {
+            flyable.registerTower(weatherTower);
+        }
+
+        for (int log = 0; log < simulations; log++) {
+            weatherTower.changeWeather();
         }
     }
 }

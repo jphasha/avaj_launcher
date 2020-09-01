@@ -5,17 +5,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Tower {
-    private List<Flyable> observers = new ArrayList<>();
+    private List<Flyable> aircrafts = new ArrayList<>();
 
     public void register(Flyable flyable) {
-        observers.add(flyable);
+        aircrafts.add(flyable);
     }
     public void unregister(Flyable flyable) {
-        observers.remove(observers.indexOf(flyable));
+        aircrafts.remove(aircrafts.indexOf(flyable));
     }
     protected void conditionsChanged() {
-        for (Flyable observer : observers) {
-            observer.updateConditions();
+        for (int i = 0; i < aircrafts.size(); i++) {
+            aircrafts.get(i).updateConditions();
         }
     }
 }
