@@ -3,7 +3,7 @@ package za.co.wethinkcode.royalAirServices.aircraftFactory;
 public class Coordinates {
     private int longitude, latitude, height;
 
-    public Coordinates(int longitude, int latitude, int height) {
+    Coordinates(int longitude, int latitude, int height) {
         if (longitude < 0) {
             this.longitude = 0;
         } else {
@@ -37,5 +37,9 @@ public class Coordinates {
 
     public int getHeight() {
         return height;
+    }
+
+    public static Coordinates getCoordinates(int longitude, int latitude, int height) {
+        return new Coordinates(longitude, latitude, height);
     }
 }

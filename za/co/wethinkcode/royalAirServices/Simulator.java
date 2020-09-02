@@ -100,7 +100,7 @@ public class Simulator {
         }
 
         for (int log = 0; log < simulations; log++) {
-            weatherTower.changeWeather();
+            weatherTower.checkWeather();
         }
     }
 

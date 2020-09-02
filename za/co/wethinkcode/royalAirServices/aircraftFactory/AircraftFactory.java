@@ -10,13 +10,13 @@ public abstract class AircraftFactory {
         Coordinates coordinates = new Coordinates(longitude, latitude, height);
         String aircraftType = type.toLowerCase();
         if (aircraftType.equalsIgnoreCase("helicopter")) {
-            Helicopter helicopter = new Helicopter(name, coordinates);
+            Helicopter helicopter = Helicopter.generateHelicopter(name, coordinates);
             return helicopter;
         } else if (aircraftType.equalsIgnoreCase("jetPlane")) {
-            JetPlane jetPlane = new JetPlane(name, coordinates);
+            JetPlane jetPlane = JetPlane.generateJetPlane(name, coordinates);
             return jetPlane;
         } else if (aircraftType.equalsIgnoreCase("baloon")) {
-            Baloon baloon = new Baloon(name, coordinates);
+            Baloon baloon = Baloon.generateBaloon(name, coordinates);
             return baloon;
         }
         return null;
