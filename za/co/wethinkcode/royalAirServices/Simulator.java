@@ -83,6 +83,9 @@ public class Simulator {
     }
 
     private static void parseScenario() throws CustomException {
+        if (scenario.size() < 2) {
+            throw new CustomException("Wrong format", "you need more than one line");
+        }
         for (String scenarioLine : scenario) {
             if (scenario.indexOf(scenarioLine) != 0) {
                 parseAircrafts(scenarioLine);
