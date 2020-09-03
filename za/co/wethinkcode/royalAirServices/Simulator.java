@@ -137,15 +137,14 @@ public class Simulator {
     }
 
     private static void registerAircraft(List<String> craftDetails) throws CustomException {
-        try {
-            if (Integer.valueOf(craftDetails.get(2)) >= 0 && Integer.valueOf(craftDetails.get(3)) >= 0 && Integer.valueOf(craftDetails.get(4)) >= 0) {
-                if (craftDetails.get(0).equalsIgnoreCase("Helicopter") || craftDetails.get(0).equalsIgnoreCase("Baloon") || craftDetails.get(0).equalsIgnoreCase("Jetplane")) {
-                    aircrafts.add(AircraftFactory.newAircraft(craftDetails.get(0), craftDetails.get(1), Integer.valueOf(craftDetails.get(2)), Integer.valueOf(craftDetails.get(3)), Integer.valueOf(craftDetails.get(4))));
-                } else {
-                    throw new CustomException("Invalid craft type", craftDetails.get(0) + " is wrong");
-                }
+        if (Integer.valueOf(craftDetails.get(2)) >= 0 && Integer.valueOf(craftDetails.get(3)) >= 0 && Integer.valueOf(craftDetails.get(4)) >= 0) {
+            if (craftDetails.get(0).equalsIgnoreCase("Helicopter") || craftDetails.get(0).equalsIgnoreCase("Baloon") || craftDetails.get(0).equalsIgnoreCase("Jetplane")) {
+                aircrafts.add(AircraftFactory.newAircraft(craftDetails.get(0), craftDetails.get(1), Integer.valueOf(craftDetails.get(2)), Integer.valueOf(craftDetails.get(3)), Integer.valueOf(craftDetails.get(4))));
+            } else {
+                throw new CustomException("Invalid craft type", craftDetails.get(0) + " is wrong");
             }
-        } catch(NumberFormatException er) {
+        }
+        else {
             throw new CustomException("Latitude, Longitude and height are all expected to be positive numbers", "See anything wrong here?: " + craftDetails.get(0) + " " + craftDetails.get(1) + " " + craftDetails.get(2) + " " + craftDetails.get(3) + " " + craftDetails.get(4));
         }
         craftDetails.clear();
