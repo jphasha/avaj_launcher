@@ -138,10 +138,14 @@ public class Simulator {
 
     private static void registerAircraft(List<String> craftDetails) throws CustomException {
         if (Integer.valueOf(craftDetails.get(2)) >= 0 && Integer.valueOf(craftDetails.get(3)) >= 0 && Integer.valueOf(craftDetails.get(4)) >= 0) {
-            if (craftDetails.get(0).equalsIgnoreCase("Helicopter") || craftDetails.get(0).equalsIgnoreCase("Baloon") || craftDetails.get(0).equalsIgnoreCase("Jetplane")) {
-                aircrafts.add(AircraftFactory.newAircraft(craftDetails.get(0), craftDetails.get(1), Integer.valueOf(craftDetails.get(2)), Integer.valueOf(craftDetails.get(3)), Integer.valueOf(craftDetails.get(4))));
+            if (Integer.valueOf(craftDetails.get(4)) < 100) {
+                if (craftDetails.get(0).equalsIgnoreCase("Helicopter") || craftDetails.get(0).equalsIgnoreCase("Baloon") || craftDetails.get(0).equalsIgnoreCase("Jetplane")) {
+                    aircrafts.add(AircraftFactory.newAircraft(craftDetails.get(0), craftDetails.get(1), Integer.valueOf(craftDetails.get(2)), Integer.valueOf(craftDetails.get(3)), Integer.valueOf(craftDetails.get(4))));
+                } else {
+                    throw new CustomException("Invalid craft type", craftDetails.get(0) + " is wrong");
+                }
             } else {
-                throw new CustomException("Invalid craft type", craftDetails.get(0) + " is wrong");
+                throw new CustomException(craftDetails.toString(), "all aircrafts must remain within the 0 - 100 range");
             }
         }
         else {
